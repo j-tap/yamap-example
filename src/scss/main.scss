@@ -1,0 +1,210 @@
+@import 'vendor';
+
+body {
+	min-width: 20rem;
+}
+
+.preloader {
+	position: fixed;
+	z-index: 5;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: $white;
+	visibility: visible;
+	opacity: 1;
+	
+	&.complete {
+		animation: 1s fadeOut forwards;
+		pointer-events: none;
+	}
+	
+	&-clock {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+		width: 4rem;
+		height: 4rem;
+		border: .2rem solid $info;
+		background: $gray-100;
+		border-radius: 100%;
+
+		&:before,
+		&:after {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin: -.05rem 0 0 -.2rem;
+			border-bottom: .2rem solid $info;
+			transform-origin: .2rem center;
+		}
+		&:before {
+			width: 30%;
+			animation: rotate 8s linear infinite;
+		}
+		&:after {
+			width: 40%;
+			animation: rotate .8s linear infinite;
+		}
+	}
+}
+
+.map {
+	position: relative;
+	overflow: hidden;
+	margin: 0 (-($grid-gutter-width / 2));
+	min-height: 100vh;
+	height: 100%;
+	
+	@media (max-width: map-get($grid-breakpoints, md)) {
+		min-height: 20rem;
+	}
+	
+	& > *,
+	& > * > * {
+		height: 100% !important;
+		width: 100% !important;
+	}
+}
+.sidebar {
+	padding: $jumbotron-padding;
+	position: relative;
+	z-index: 2;
+	margin: 0 (-($grid-gutter-width / 2));
+	background: $pagination-bg;
+	box-shadow: 0 0 .6rem .3rem rgba(#000, .2);
+	height: auto;
+	
+	@media (min-width: map-get($grid-breakpoints, md)) {
+		min-height: 100vh;
+	}
+
+	&-inner {
+		overflow: auto;
+	}
+
+	.list-group {
+
+		&-item {
+			position: relative;
+			cursor: move; 
+			cursor: -webkit-grab; 
+			transition: background .2s ease-in-out, transform .3s ease-out, opacity .25s ease-out;
+			
+			&.list-group-item-warning {
+				cursor: default;
+			}
+
+			&.removed {
+				transform: translateX(-130%);
+				opacity: 0;
+			}
+
+			.i-delete {
+				cursor: pointer;
+				position: absolute;
+				top: 0;
+				right: 0;
+				color: $danger;
+				font-size: 1.5rem;
+				height: 3rem;
+				width: 3rem;
+				line-height: 2.5rem;
+				text-align: center;
+				transition: background .2s ease-in-out, color .2s ease-in-out;
+				
+				&:hover,
+				&:focus {
+					background: $danger;
+					color: $white;
+				}
+			}
+		}
+	}
+}
+
+
+.light-help {
+	position: relative;
+	
+	&:before,
+	&:after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		z-index: 2;
+		width: 0;
+		height: 0;
+		background: rgba($white, .4);
+		box-shadow: 0 0 1.5rem rgba($white, .4);
+		border-radius: 100%;
+		transform: translate(-50%, -50%);
+		opacity: 0;
+	}
+	&:before {
+		animation: lightEffect1 3s infinite;
+	}
+	&:after {
+		animation: lightEffect2 3s infinite;
+	}
+}
+
+@keyframes lightEffect1 {
+	0%, 80% {
+		opacity: 0;
+		width: 0;
+		height: 0;
+	}
+	80% {opacity: 1}
+	100% {
+		opacity: 0;
+		width: 7rem;
+		height: 7rem;
+	}
+}
+@keyframes lightEffect2 {
+	0%, 88% {
+		opacity: 0;
+		width: 0;
+		height: 0;
+	}
+	88% {opacity: 1}
+	100% {
+		opacity: 0;
+		width: 7rem;
+		height: 7rem;
+	}
+}
+
+@keyframes fadeTop {
+	to {
+		transform: translateY(-100%);
+	}
+}
+
+@keyframes fadeIn {
+	to {
+		visibility: visible;
+		opacity: 1;
+	}
+}
+
+@keyframes fadeOut {
+	99% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 0;
+		visibility: hidden;
+	}
+}
+
+@keyframes rotate {
+	to {transform: rotate(360deg)}
+}

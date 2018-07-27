@@ -1,0 +1,33 @@
+//- index
+extends pug/layout
+
+block head
+	title Редактор маршрута
+
+block body
+	.preloader#preloader
+		.preloader-clock
+
+	.container-fluid
+		.row
+			.col-xl-3.col-lg-4.col-md-5
+				.sidebar
+					h1.h3.mb-4 
+						| Редактор маршрута
+						
+					.input-group.mb-4
+						input.form-control#inputTitleMarker(
+							type='text' 
+							placeholder='Название точки' 
+							maxlength='20'
+						)
+						.input-group-append
+							button.btn.btn-success.light-help#btnAddMark 
+								| Добавить
+
+					div.list-group#listMarks
+						.list-group-item.list-group-item-warning
+							| Вы ещё не добавили точки
+
+			.col-xl-9.col-lg-8.col-md-7
+				.map#map
